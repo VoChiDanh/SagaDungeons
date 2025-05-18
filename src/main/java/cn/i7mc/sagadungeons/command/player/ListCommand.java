@@ -7,7 +7,6 @@ import cn.i7mc.sagadungeons.util.MessageUtil;
 import cn.i7mc.sagadungeons.util.TimeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +31,16 @@ public class ListCommand extends AbstractCommand {
     public void execute(CommandSender sender, String[] args) {
         // 获取所有副本
         Map<String, DungeonInstance> dungeons = plugin.getDungeonManager().getActiveDungeons();
-        
+
         // 检查是否有副本
         if (dungeons.isEmpty()) {
             sendMessage(sender, "command.list.no-dungeons");
             return;
         }
-        
+
         // 发送标题
         sendMessage(sender, "command.list.header");
-        
+
         // 发送副本列表
         for (DungeonInstance dungeon : dungeons.values()) {
             // 获取创建者名称
@@ -49,28 +48,28 @@ public class ListCommand extends AbstractCommand {
             if (ownerName == null) {
                 ownerName = dungeon.getOwnerUUID().toString();
             }
-            
+
             // 获取玩家数量
             int playerCount = dungeon.getPlayerCount();
-            
+
             // 获取剩余时间
             String remainingTime = TimeUtil.formatTimeShort(dungeon.getRemainingTime());
-            
+
             // 获取公开状态
-            String publicStatus = dungeon.isPublic() ? 
-                    plugin.getConfigManager().getMessageManager().getMessage("general.public") : 
+            String publicStatus = dungeon.isPublic() ?
+                    plugin.getConfigManager().getMessageManager().getMessage("general.public") :
                     plugin.getConfigManager().getMessageManager().getMessage("general.private");
-            
+
             // 发送副本信息
-            sendMessage(sender, "command.list.entry", 
-                    MessageUtil.createPlaceholders("id", dungeon.getId(), 
-                            "template", dungeon.getTemplateName(), 
-                            "owner", ownerName, 
-                            "players", String.valueOf(playerCount), 
-                            "time", remainingTime, 
+            sendMessage(sender, "command.list.entry",
+                    MessageUtil.createPlaceholders("id", dungeon.getId(),
+                            "template", dungeon.getTemplateName(),
+                            "owner", ownerName,
+                            "players", String.valueOf(playerCount),
+                            "time", remainingTime,
                             "status", publicStatus));
         }
-        
+
         // 发送页脚
         sendMessage(sender, "command.list.footer");
     }

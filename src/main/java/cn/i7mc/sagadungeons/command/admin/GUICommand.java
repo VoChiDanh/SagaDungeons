@@ -2,7 +2,6 @@ package cn.i7mc.sagadungeons.command.admin;
 
 import cn.i7mc.sagadungeons.SagaDungeons;
 import cn.i7mc.sagadungeons.command.AbstractCommand;
-import cn.i7mc.sagadungeons.util.MessageUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -36,7 +35,7 @@ public class GUICommand extends AbstractCommand {
 
         // 打开模板选择界面
         plugin.getGUIManager().openTemplateSelectGUI(player);
-        
+
         // 发送消息
         sendMessage(sender, "command.admin.gui.success");
     }

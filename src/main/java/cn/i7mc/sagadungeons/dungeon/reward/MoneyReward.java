@@ -30,14 +30,14 @@ public class MoneyReward implements DungeonReward {
         if (vaultHook == null || !vaultHook.isEnabled()) {
             return false;
         }
-        
+
         // 给予金币
         return vaultHook.depositMoney(player, amount);
     }
 
     @Override
     public String getDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.money.description", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.money.description",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.format("%.2f", amount)));
     }
 

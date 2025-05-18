@@ -15,10 +15,10 @@ import java.util.Map;
  * 负责管理所有触发器
  */
 public class TriggerManager {
-    
+
     private final SagaDungeons plugin;
     private final Map<String, List<DungeonTrigger>> dungeonTriggers = new HashMap<>();
-    
+
     /**
      * 构造函数
      * @param plugin 插件实例
@@ -26,7 +26,7 @@ public class TriggerManager {
     public TriggerManager(SagaDungeons plugin) {
         this.plugin = plugin;
     }
-    
+
     /**
      * 加载触发器配置
      * @param templateName 模板名称
@@ -34,7 +34,7 @@ public class TriggerManager {
      */
     public void loadTriggers(String templateName, ConfigurationSection section) {
         List<DungeonTrigger> triggers = new ArrayList<>();
-        
+
         // 加载所有触发器
         if (section != null) {
             // 加载关卡跳转触发器
@@ -43,7 +43,7 @@ public class TriggerManager {
                 DungeonTrigger trigger = LevelJumpTrigger.fromConfig(levelJumpSection);
                 triggers.add(trigger);
             }
-            
+
             // 加载关卡返回触发器
             ConfigurationSection levelBackSection = section.getConfigurationSection("levelback");
             if (levelBackSection != null) {
@@ -51,11 +51,11 @@ public class TriggerManager {
                 triggers.add(trigger);
             }
         }
-        
+
         // 保存触发器列表
         dungeonTriggers.put(templateName, triggers);
     }
-    
+
     /**
      * 检查并执行触发器
      * @param instance 副本实例
@@ -64,7 +64,7 @@ public class TriggerManager {
     public void checkAndExecuteTriggers(DungeonInstance instance, Player player) {
         String templateName = instance.getTemplateName();
         List<DungeonTrigger> triggers = dungeonTriggers.get(templateName);
-        
+
         if (triggers != null) {
             for (DungeonTrigger trigger : triggers) {
                 if (trigger.checkCondition(instance, player)) {
@@ -73,7 +73,7 @@ public class TriggerManager {
             }
         }
     }
-    
+
     /**
      * 获取触发器的配置
      * @param templateName 模板名称
@@ -84,7 +84,7 @@ public class TriggerManager {
         if (triggers == null || triggers.isEmpty()) {
             return null;
         }
-        
+
         // 创建一个新的配置部分来存储所有触发器的配置
         ConfigurationSection config = plugin.getConfig().createSection(templateName + "_triggers");
         for (DungeonTrigger trigger : triggers) {

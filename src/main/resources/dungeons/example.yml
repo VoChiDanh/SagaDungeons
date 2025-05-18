@@ -16,17 +16,17 @@ triggers:
     id: "example_to_level2"
     targetLevel: "example_level_2"
     condition: "COMPLETION"
-    config: 
+    config:
       # 当副本完成时，自动进入下一个关卡
       type: LEVEL_JUMP
       target: example_level_2
       delay: 5
-      message: "&a恭喜完成当前关卡！5秒后进入下一关..." 
+      message: "&a恭喜完成当前关卡！5秒后进入下一关..."
   levelback:
     id: "example_to_level1"
     targetLevel: "example_level_1"
     condition: "DEATH"
-    config: 
+    config:
       # 当副本死亡时，自动返回上一个关卡
       type: LEVEL_JUMP
       target: example_level_1

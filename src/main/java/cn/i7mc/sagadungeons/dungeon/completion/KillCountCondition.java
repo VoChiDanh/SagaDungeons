@@ -33,7 +33,7 @@ public class KillCountCondition implements CompletionCondition {
 
     @Override
     public String getDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-count.description", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-count.description",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("count", String.valueOf(targetCount)));
     }
 
@@ -54,16 +54,15 @@ public class KillCountCondition implements CompletionCondition {
 
     @Override
     public String getProgressDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-count.progress", 
-                plugin.getConfigManager().getMessageManager().createPlaceholders("current", String.valueOf(currentCount), 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-count.progress",
+                plugin.getConfigManager().getMessageManager().createPlaceholders("current", String.valueOf(currentCount),
                         "target", String.valueOf(targetCount)));
     }
 
     @Override
     public void handleEvent(Player player, String event, Object data) {
-        if ("kill".equals(event) && data instanceof Entity) {
-            Entity entity = (Entity) data;
-            
+        if ("kill".equals(event) && data instanceof Entity entity) {
+
             // 检查是否为怪物
             if (entity instanceof Monster) {
                 // 增加击杀数量

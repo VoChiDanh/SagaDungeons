@@ -34,12 +34,12 @@ public class ReachAreaCondition implements CompletionCondition {
         if (reached) {
             return true;
         }
-        
+
         // 获取副本世界
         if (instance.getWorld() == null) {
             return false;
         }
-        
+
         // 检查是否有玩家到达目标区域
         for (Player player : instance.getWorld().getPlayers()) {
             if (isInTargetArea(player.getLocation())) {
@@ -47,7 +47,7 @@ public class ReachAreaCondition implements CompletionCondition {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -61,16 +61,16 @@ public class ReachAreaCondition implements CompletionCondition {
         if (!location.getWorld().equals(targetLocation.getWorld())) {
             return false;
         }
-        
+
         // 检查距离是否在半径内
         return location.distance(targetLocation) <= radius;
     }
 
     @Override
     public String getDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.reach-area.description", 
-                plugin.getConfigManager().getMessageManager().createPlaceholders("x", String.valueOf(targetLocation.getBlockX()), 
-                        "y", String.valueOf(targetLocation.getBlockY()), 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.reach-area.description",
+                plugin.getConfigManager().getMessageManager().createPlaceholders("x", String.valueOf(targetLocation.getBlockX()),
+                        "y", String.valueOf(targetLocation.getBlockY()),
                         "z", String.valueOf(targetLocation.getBlockZ())));
     }
 
@@ -100,9 +100,8 @@ public class ReachAreaCondition implements CompletionCondition {
 
     @Override
     public void handleEvent(Player player, String event, Object data) {
-        if ("move".equals(event) && data instanceof Location) {
-            Location location = (Location) data;
-            
+        if ("move".equals(event) && data instanceof Location location) {
+
             // 检查是否到达目标区域
             if (isInTargetArea(location)) {
                 reached = true;

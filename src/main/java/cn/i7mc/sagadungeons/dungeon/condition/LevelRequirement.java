@@ -36,14 +36,14 @@ public class LevelRequirement implements DungeonRequirement {
         if (level <= 0) {
             return true;
         }
-        
+
         // 检查玩家等级是否达到要求
         return player.getLevel() >= level;
     }
 
     @Override
     public String getFailMessage(Player player) {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.level.fail", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.level.fail",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("level", String.valueOf(level)));
     }
 

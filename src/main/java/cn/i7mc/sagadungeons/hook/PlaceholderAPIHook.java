@@ -7,7 +7,6 @@ import cn.i7mc.sagadungeons.util.TimeUtil;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 /**
  * PlaceholderAPI集成
@@ -81,10 +80,10 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
         if (player == null) {
             return "";
         }
-        
+
         // 获取玩家数据
         PlayerData playerData = plugin.getDungeonManager().getPlayerData(player.getUniqueId());
-        
+
         // 检查玩家是否在副本中
         if (!playerData.isInDungeon()) {
             // 不在副本中的占位符
@@ -93,15 +92,15 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
             }
             return "";
         }
-        
+
         // 获取玩家当前副本
         String dungeonId = playerData.getCurrentDungeonId();
         DungeonInstance dungeon = plugin.getDungeonManager().getDungeon(dungeonId);
-        
+
         if (dungeon == null) {
             return "";
         }
-        
+
         // 处理各种占位符
         switch (identifier) {
             case "in_dungeon":

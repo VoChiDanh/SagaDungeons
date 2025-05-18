@@ -69,7 +69,7 @@ public class SerializedItemReward implements DungeonReward {
         if (item == null) {
             return false;
         }
-        
+
         // 给予物品
         if (player.getInventory().firstEmpty() != -1) {
             // 如果背包有空位，直接添加
@@ -86,16 +86,16 @@ public class SerializedItemReward implements DungeonReward {
     public String getDescription() {
         ItemStack item = getItem();
         if (item == null) {
-            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.item.description", 
-                    plugin.getConfigManager().getMessageManager().createPlaceholders("item", "未知物品", 
+            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.item.description",
+                    plugin.getConfigManager().getMessageManager().createPlaceholders("item", "未知物品",
                             "amount", String.valueOf(amount)));
         }
-        
-        String itemName = item.hasItemMeta() && item.getItemMeta().hasDisplayName() ? 
+
+        String itemName = item.hasItemMeta() && item.getItemMeta().hasDisplayName() ?
                 item.getItemMeta().getDisplayName() : item.getType().name();
-        
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.item.description", 
-                plugin.getConfigManager().getMessageManager().createPlaceholders("item", itemName, 
+
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.item.description",
+                plugin.getConfigManager().getMessageManager().createPlaceholders("item", itemName,
                         "amount", String.valueOf(amount)));
     }
 

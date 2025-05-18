@@ -37,20 +37,20 @@ public class PointsRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查PlayerPoints是否可用
         PlayerPointsHook playerPointsHook = plugin.getHookManager().getPlayerPointsHook();
         if (playerPointsHook == null || !playerPointsHook.isEnabled()) {
             return false;
         }
-        
+
         // 检查玩家是否有足够的点券
         return playerPointsHook.hasPoints(player, amount);
     }
 
     @Override
     public String getFailMessage(Player player) {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.points.fail", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.points.fail",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount)));
     }
 
@@ -60,18 +60,18 @@ public class PointsRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查PlayerPoints是否可用
         PlayerPointsHook playerPointsHook = plugin.getHookManager().getPlayerPointsHook();
         if (playerPointsHook == null || !playerPointsHook.isEnabled()) {
             return false;
         }
-        
+
         // 检查玩家是否有足够的点券
         if (!playerPointsHook.hasPoints(player, amount)) {
             return false;
         }
-        
+
         // 扣除点券
         return playerPointsHook.takePoints(player, amount);
     }

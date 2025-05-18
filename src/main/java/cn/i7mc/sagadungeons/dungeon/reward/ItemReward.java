@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,19 +38,19 @@ public class ItemReward implements DungeonReward {
     public ItemReward(SagaDungeons plugin, Material material, int amount, String name, List<String> lore) {
         this.plugin = plugin;
         this.item = new ItemStack(material, amount);
-        
+
         // 设置物品元数据
         if (name != null || lore != null) {
             ItemMeta meta = item.getItemMeta();
-            
+
             if (name != null) {
                 meta.setDisplayName(name);
             }
-            
+
             if (lore != null) {
                 meta.setLore(lore);
             }
-            
+
             item.setItemMeta(meta);
         }
     }
@@ -72,11 +71,11 @@ public class ItemReward implements DungeonReward {
 
     @Override
     public String getDescription() {
-        String itemName = item.hasItemMeta() && item.getItemMeta().hasDisplayName() ? 
+        String itemName = item.hasItemMeta() && item.getItemMeta().hasDisplayName() ?
                 item.getItemMeta().getDisplayName() : item.getType().name();
-        
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.item.description", 
-                plugin.getConfigManager().getMessageManager().createPlaceholders("item", itemName, 
+
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.item.description",
+                plugin.getConfigManager().getMessageManager().createPlaceholders("item", itemName,
                         "amount", String.valueOf(item.getAmount())));
     }
 

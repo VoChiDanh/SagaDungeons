@@ -30,14 +30,14 @@ public class PointsReward implements DungeonReward {
         if (playerPointsHook == null || !playerPointsHook.isEnabled()) {
             return false;
         }
-        
+
         // 给予点券
         return playerPointsHook.givePoints(player, amount);
     }
 
     @Override
     public String getDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.points.description", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.points.description",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount)));
     }
 

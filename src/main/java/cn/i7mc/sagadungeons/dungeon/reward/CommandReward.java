@@ -31,7 +31,7 @@ public class CommandReward implements DungeonReward {
         // 替换变量
         String processedCommand = command.replace("%player%", player.getName())
                 .replace("%uuid%", player.getUniqueId().toString());
-        
+
         // 执行命令
         return Bukkit.dispatchCommand(Bukkit.getConsoleSender(), processedCommand);
     }
@@ -41,7 +41,7 @@ public class CommandReward implements DungeonReward {
         if (description != null && !description.isEmpty()) {
             return description;
         }
-        
+
         return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.command.description");
     }
 

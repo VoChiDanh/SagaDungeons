@@ -2,10 +2,8 @@ package cn.i7mc.sagadungeons.dungeon.completion;
 
 import cn.i7mc.sagadungeons.SagaDungeons;
 import cn.i7mc.sagadungeons.dungeon.DungeonInstance;
-import cn.i7mc.sagadungeons.model.DungeonTemplate;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
@@ -40,19 +38,19 @@ public class KillAllCondition implements CompletionCondition {
         if (initialized) {
             return;
         }
-        
+
         World world = instance.getWorld();
         if (world == null) {
             return;
         }
-        
+
         // 获取世界中的所有怪物
         for (Entity entity : world.getEntities()) {
             if (entity instanceof Monster) {
                 allMonsters.add(entity.getUniqueId());
             }
         }
-        
+
         initialized = true;
     }
 
@@ -60,12 +58,12 @@ public class KillAllCondition implements CompletionCondition {
     public boolean check(DungeonInstance instance) {
         // 初始化
         initialize(instance);
-        
+
         // 如果没有怪物，直接返回true
         if (allMonsters.isEmpty()) {
             return true;
         }
-        
+
         // 检查是否所有怪物都已被击杀
         return killedMonsters.size() >= allMonsters.size();
     }
@@ -92,22 +90,21 @@ public class KillAllCondition implements CompletionCondition {
         if (allMonsters.isEmpty()) {
             return 1.0;
         }
-        
+
         return (double) killedMonsters.size() / allMonsters.size();
     }
 
     @Override
     public String getProgressDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-all.progress", 
-                plugin.getConfigManager().getMessageManager().createPlaceholders("killed", String.valueOf(killedMonsters.size()), 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-all.progress",
+                plugin.getConfigManager().getMessageManager().createPlaceholders("killed", String.valueOf(killedMonsters.size()),
                         "total", String.valueOf(allMonsters.size())));
     }
 
     @Override
     public void handleEvent(Player player, String event, Object data) {
-        if ("kill".equals(event) && data instanceof Entity) {
-            Entity entity = (Entity) data;
-            
+        if ("kill".equals(event) && data instanceof Entity entity) {
+
             // 检查是否为怪物
             if (entity instanceof Monster) {
                 // 添加到已击杀列表

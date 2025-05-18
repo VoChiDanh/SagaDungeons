@@ -9,22 +9,22 @@ public enum RewardType {
      * 金币奖励
      */
     MONEY,
-    
+
     /**
      * 点券奖励
      */
     POINTS,
-    
+
     /**
      * 物品奖励
      */
     ITEM,
-    
+
     /**
      * 经验奖励
      */
     EXPERIENCE,
-    
+
     /**
      * 命令奖励
      */

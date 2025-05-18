@@ -37,20 +37,20 @@ public class MoneyRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查Vault是否可用
         VaultHook vaultHook = plugin.getHookManager().getVaultHook();
         if (vaultHook == null || !vaultHook.isEnabled()) {
             return false;
         }
-        
+
         // 检查玩家是否有足够的金币
         return vaultHook.hasMoney(player, amount);
     }
 
     @Override
     public String getFailMessage(Player player) {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.money.fail", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.money.fail",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.format("%.2f", amount)));
     }
 
@@ -60,18 +60,18 @@ public class MoneyRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查Vault是否可用
         VaultHook vaultHook = plugin.getHookManager().getVaultHook();
         if (vaultHook == null || !vaultHook.isEnabled()) {
             return false;
         }
-        
+
         // 检查玩家是否有足够的金币
         if (!vaultHook.hasMoney(player, amount)) {
             return false;
         }
-        
+
         // 扣除金币
         return vaultHook.withdrawMoney(player, amount);
     }

@@ -51,10 +51,10 @@ public abstract class AbstractGUI implements InventoryHolder {
     public void open() {
         // 创建物品栏
         inventory = Bukkit.createInventory(this, size, title);
-        
+
         // 初始化界面
         init();
-        
+
         // 打开界面
         player.openInventory(inventory);
     }

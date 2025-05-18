@@ -31,7 +31,7 @@ public class ExperienceReward implements DungeonReward {
 
     @Override
     public String getDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.experience.description", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.reward.experience.description",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount)));
     }
 

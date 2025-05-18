@@ -26,12 +26,12 @@ public class DebugMessageManager {
      */
     public void loadDebugMessages() {
         File debugMessagesFile = new File(plugin.getDataFolder(), "debugmessage.yml");
-        
+
         // 如果调试消息文件不存在，则保存默认文件
         if (!debugMessagesFile.exists()) {
             plugin.saveResource("debugmessage.yml", false);
         }
-        
+
         // 加载调试消息文件
         debugMessagesConfig = YamlConfiguration.loadConfiguration(debugMessagesFile);
     }
@@ -57,12 +57,12 @@ public class DebugMessageManager {
      */
     public String getMessage(String path, Map<String, String> placeholders) {
         String message = getMessage(path);
-        
+
         // 替换变量
         for (Map.Entry<String, String> entry : placeholders.entrySet()) {
             message = message.replace("%" + entry.getKey() + "%", entry.getValue());
         }
-        
+
         return message;
     }
 

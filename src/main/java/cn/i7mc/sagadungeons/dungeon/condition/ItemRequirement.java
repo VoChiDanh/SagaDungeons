@@ -71,22 +71,22 @@ public class ItemRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 获取玩家背包
         PlayerInventory inventory = player.getInventory();
-        
+
         // 如果需要检查物品名称
         if (displayName != null && !displayName.isEmpty()) {
             int count = 0;
-            
+
             // 遍历背包中的所有物品
             for (ItemStack item : inventory.getContents()) {
-                if (item != null && item.getType() == material && item.hasItemMeta() && item.getItemMeta().hasDisplayName() 
+                if (item != null && item.getType() == material && item.hasItemMeta() && item.getItemMeta().hasDisplayName()
                         && item.getItemMeta().getDisplayName().equals(displayName)) {
                     count += item.getAmount();
                 }
             }
-            
+
             return count >= amount;
         } else {
             // 只检查物品类型和数量
@@ -97,12 +97,12 @@ public class ItemRequirement implements DungeonRequirement {
     @Override
     public String getFailMessage(Player player) {
         if (displayName != null && !displayName.isEmpty()) {
-            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.name.fail", 
-                    plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount), 
+            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.name.fail",
+                    plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount),
                             "item", material.name(), "name", displayName));
         } else {
-            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.fail", 
-                    plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount), 
+            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.fail",
+                    plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount),
                             "item", material.name()));
         }
     }
@@ -113,23 +113,23 @@ public class ItemRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查玩家是否有足够的物品
         if (!check(player)) {
             return false;
         }
-        
+
         // 获取玩家背包
         PlayerInventory inventory = player.getInventory();
-        
+
         // 如果需要检查物品名称
         if (displayName != null && !displayName.isEmpty()) {
             int remaining = amount;
-            
+
             // 遍历背包中的所有物品
             for (int i = 0; i < inventory.getSize(); i++) {
                 ItemStack item = inventory.getItem(i);
-                if (item != null && item.getType() == material && item.hasItemMeta() && item.getItemMeta().hasDisplayName() 
+                if (item != null && item.getType() == material && item.hasItemMeta() && item.getItemMeta().hasDisplayName()
                         && item.getItemMeta().getDisplayName().equals(displayName)) {
                     if (item.getAmount() <= remaining) {
                         remaining -= item.getAmount();
@@ -138,13 +138,13 @@ public class ItemRequirement implements DungeonRequirement {
                         item.setAmount(item.getAmount() - remaining);
                         remaining = 0;
                     }
-                    
+
                     if (remaining <= 0) {
                         break;
                     }
                 }
             }
-            
+
             return remaining <= 0;
         } else {
             // 只检查物品类型和数量

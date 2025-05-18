@@ -8,7 +8,10 @@ import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 通关条件管理器
@@ -44,10 +47,10 @@ public class CompletionManager {
         if (compositeSection != null) {
             String type = compositeSection.getString("type", "AND");
             int priority = compositeSection.getInt("priority", 0);
-            
+
             CompletionType compositeType = type.equalsIgnoreCase("OR") ? CompletionType.OR : CompletionType.AND;
             CompositeCondition compositeCondition = new CompositeCondition(plugin, compositeType, priority);
-            
+
             // 加载子条件
             ConfigurationSection conditionsSection = compositeSection.getConfigurationSection("conditions");
             if (conditionsSection != null) {
@@ -61,7 +64,7 @@ public class CompletionManager {
                     }
                 }
             }
-            
+
             if (!compositeCondition.getConditions().isEmpty()) {
                 conditions.add(compositeCondition);
             }
@@ -81,7 +84,7 @@ public class CompletionManager {
                 int p2 = c2 instanceof CompositeCondition ? ((CompositeCondition) c2).getPriority() : 0;
                 return Integer.compare(p2, p1); // 优先级高的排在前面
             });
-            
+
             dungeonConditions.put(template.getName(), conditions);
         }
     }

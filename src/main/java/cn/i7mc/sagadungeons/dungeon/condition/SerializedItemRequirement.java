@@ -62,7 +62,7 @@ public class SerializedItemRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查玩家是否有足够的物品
         return ItemStackUtil.hasEnoughSerializedItem(player, serializedItem, amount);
     }
@@ -71,16 +71,16 @@ public class SerializedItemRequirement implements DungeonRequirement {
     public String getFailMessage(Player player) {
         ItemStack item = getItem();
         if (item == null) {
-            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.fail", 
-                    plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount), 
+            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.fail",
+                    plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount),
                             "item", "未知物品"));
         }
-        
-        String itemName = item.hasItemMeta() && item.getItemMeta().hasDisplayName() ? 
+
+        String itemName = item.hasItemMeta() && item.getItemMeta().hasDisplayName() ?
                 item.getItemMeta().getDisplayName() : item.getType().name();
-        
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.name.fail", 
-                plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount), 
+
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.requirement.item.name.fail",
+                plugin.getConfigManager().getMessageManager().createPlaceholders("amount", String.valueOf(amount),
                         "item", item.getType().name(), "name", itemName));
     }
 
@@ -90,12 +90,12 @@ public class SerializedItemRequirement implements DungeonRequirement {
         if (amount <= 0) {
             return true;
         }
-        
+
         // 检查玩家是否有足够的物品
         if (!check(player)) {
             return false;
         }
-        
+
         // 移除物品
         return ItemStackUtil.removeSerializedItem(player, serializedItem, amount);
     }

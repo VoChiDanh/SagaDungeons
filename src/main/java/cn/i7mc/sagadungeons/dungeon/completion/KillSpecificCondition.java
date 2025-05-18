@@ -37,7 +37,7 @@ public class KillSpecificCondition implements CompletionCondition {
 
     @Override
     public String getDescription() {
-        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-specific.description", 
+        return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-specific.description",
                 plugin.getConfigManager().getMessageManager().createPlaceholders("mob", targetMobName));
     }
 
@@ -60,21 +60,20 @@ public class KillSpecificCondition implements CompletionCondition {
     @Override
     public String getProgressDescription() {
         if (killed) {
-            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-specific.killed", 
+            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-specific.killed",
                     plugin.getConfigManager().getMessageManager().createPlaceholders("mob", targetMobName));
         } else {
-            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-specific.not-killed", 
+            return plugin.getConfigManager().getMessageManager().getMessage("dungeon.completion.kill-specific.not-killed",
                     plugin.getConfigManager().getMessageManager().createPlaceholders("mob", targetMobName));
         }
     }
 
     @Override
     public void handleEvent(Player player, String event, Object data) {
-        if ("kill".equals(event) && data instanceof Entity) {
-            Entity entity = (Entity) data;
-            
+        if ("kill".equals(event) && data instanceof Entity entity) {
+
             // 检查是否为目标怪物
-            if (entity.getName().equals(targetMobName) || 
+            if (entity.getName().equals(targetMobName) ||
                     (entity.getCustomName() != null && entity.getCustomName().equals(targetMobName))) {
                 // 添加到已击杀列表
                 killedTargets.add(entity.getUniqueId());

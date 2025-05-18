@@ -15,11 +15,11 @@ public class TimeUtil {
         if (seconds < 0) {
             seconds = 0;
         }
-        
+
         int hours = seconds / 3600;
         int minutes = (seconds % 3600) / 60;
         int secs = seconds % 60;
-        
+
         return String.format("%02d:%02d:%02d", hours, minutes, secs);
     }
 
@@ -32,7 +32,7 @@ public class TimeUtil {
         if (seconds < 0) {
             seconds = 0;
         }
-        
+
         if (seconds < 60) {
             return seconds + "秒";
         } else if (seconds < 3600) {
